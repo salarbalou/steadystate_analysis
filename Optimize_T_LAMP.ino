@@ -21,6 +21,7 @@ float A = 1.0206;
 float  B = 8.4271;
 
 int i= 0;
+int j = 0;
 
 unsigned long denat_start_time;
 unsigned long exten_start_time;
@@ -43,17 +44,17 @@ while (temperature < 65){
      }
  i  = i+10;
 }
-i = i;
+j = i;
 ss_start_time = millis();
   while(((millis() - ss_start_time)/1000) < 1800){ // maintain temperature constant for 30 minutes//
     if (temperature < 65){
-      analogWrite(trans_pin, i);
+      analogWrite(trans_pin, j);
           update_temperature();
           update_current();
           display_results();
     }
     if (temperature > 65){    
-      analogWrite(trans_pin, i-10);
+      analogWrite(trans_pin, j-10);
           update_temperature();
           update_current();
 
