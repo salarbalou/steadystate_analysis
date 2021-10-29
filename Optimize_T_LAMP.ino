@@ -20,7 +20,7 @@ float t = 0;
 float A = 1.0206;
 float  B = 8.4271;
 
-int i= 0;
+int i= 10;
 int j = 0;
 
 unsigned long denat_start_time;
@@ -34,29 +34,30 @@ Serial.begin(9600);
 }
 
 void loop() {
-while (temperature < 65){
+while (temperature <= 65){
  process_start_time = millis();
- while(((millis() - process_start_time)/1000) < 5){ //// keep dc constant for 5 seconds
+   while(((millis() - process_start_time)/1000) < 10){ //// keep dc constant for 5 seconds
        analogWrite(trans_pin, i);
            update_temperature();
            update_current();
            display_results();
      }
- i  = i+10;
+ i  = i+5;
 }
-j = i;
+i = i-10;
 ss_start_time = millis();
-  while(((millis() - ss_start_time)/1000) < 1800){ // maintain temperature constant for 30 minutes//
+while(((millis() - ss_start_time)/1000) < 1800){ // maintain temperature constant for 30 minutes//
     if (temperature < 65){
-      analogWrite(trans_pin, j);
+      analogWrite(trans_pin, i);
           update_temperature();
           update_current();
           display_results();
     }
-    if (temperature > 65){    
-      analogWrite(trans_pin, j-10);
+    if (temperature >= 65){    
+      analogWrite(trans_pin, (i-10));
           update_temperature();
           update_current();
+          display_results();
 
     }
 
